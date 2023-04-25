@@ -10,7 +10,6 @@ export NVM_DIR=${HOME}/.nvm
 export NVM_COMPLETION=true
 
 # Source nix
-
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi
 
 # Source plugins
@@ -29,7 +28,16 @@ alias exit='exit 0'
 
 # Paths
 #
-export PATH=/home/rst/.local/bin:$PATH
+
+if ! [[ "$PATH" =~ "/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0:/mnt/c/WINDOWS/System32:/mnt/c/Users/rihase/AppData/Local/Programs/Microsoft\ VS\ Code/bin:" ]]
+then
+    export PATH=/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0:/mnt/c/WINDOWS/System32:/mnt/c/Users/rihase/AppData/Local/Programs/Microsoft\ VS\ Code/bin:$PATH
+fi
+
+if ! [[ "$PATH" =~ "/home/rst/.local/bin:" ]]
+then
+    export PATH=/home/rst/.local/bin:$PATH
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 

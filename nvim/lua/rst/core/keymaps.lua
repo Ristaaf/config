@@ -39,7 +39,6 @@ keymap.set("n", "<leader>w", "<cmd>w<cr>")
 
 keymap.set("n", "<c-a>", "gg<S-v>G")
 
-keymap.set("n", "f", "<c-w>w")
 keymap.set("n", "<leader>s", ":vsplit<cr><c-w>w", { silent = true })
 
 keymap.set("n", "H", "^")

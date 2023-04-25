@@ -241,6 +241,11 @@ _G.packer_plugins = {
     path = "/home/rst/.local/share/nvim/site/pack/packer/start/typescript.nvim",
     url = "https://github.com/jose-elias-alvarez/typescript.nvim"
   },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/home/rst/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
   ["vim-tmux-navigator"] = {
     loaded = true,
     path = "/home/rst/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
