@@ -18,6 +18,8 @@ telescope.setup({
 			},
 		},
 		file_ignore_patterns = { "node%_modules/.*" },
+		layout_strategy = "vertical",
+		hidden = true,
 	},
 })
 require("telescope.builtin").lsp_references({

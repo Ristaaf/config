@@ -28,7 +28,7 @@ local on_attach = function(client, bufnr)
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
 	-- set keybinds
-	keymap.set("n", "gf", telescope_builtin.lsp_references, opts) -- show definition, references
+	keymap.set("n", "gf", ":Telescope lsp_references show_line=false<CR>", opts) -- show definition, references
 	keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- got to declaration
 	keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- see definition and make edits in window
 	keymap.set("n", "gi", vim.lsp.buf.implementation, opts) -- go to implementation
@@ -53,13 +53,14 @@ local on_attach = function(client, bufnr)
 	if client.server_capabilities.documentHighlightProvider then
 		vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
 		vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
-		vim.api.nvim_create_autocmd("CursorHold", {
-			callback = vim.lsp.buf.document_highlight,
-			buffer = bufnr,
-			group = "lsp_document_highlight",
-			desc = "Document Highlight",
-		})
+		-- vim.api.nvim_create_autocmd("CursorHold", {
+		-- 	callback = vim.lsp.buf.document_highlight,
+		-- 	buffer = bufnr,
+		-- 	group = "lsp_document_highlight",
+		-- 	desc = "Document Highlight",
+		-- })
 		keymap.set("n", "<leader>ndh", vim.lsp.buf.clear_references, opts)
+		keymap.set("n", "<leader>h", vim.lsp.buf.document_highlight, opts)
 		--vim.api.nvim_create_autocmd("CursorMoved", {
 		--		callback = vim.lsp.buf.clear_references,
 		--		buffer = bufnr,
@@ -91,8 +92,7 @@ lspconfig["cssls"].setup({
 	on_attach = on_attach,
 })
 
--- configure tailwindcss server
-lspconfig["tailwindcss"].setup({
+lspconfig["jsonls"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })

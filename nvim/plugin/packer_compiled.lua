@@ -174,6 +174,11 @@ _G.packer_plugins = {
     path = "/home/rst/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
     url = "https://github.com/rcarriga/nvim-dap-ui"
   },
+  ["nvim-dap-virtual-text"] = {
+    loaded = true,
+    path = "/home/rst/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text",
+    url = "https://github.com/theHamsta/nvim-dap-virtual-text"
+  },
   ["nvim-dap-vscode-js"] = {
     loaded = true,
     path = "/home/rst/.local/share/nvim/site/pack/packer/start/nvim-dap-vscode-js",

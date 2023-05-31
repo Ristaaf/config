@@ -87,6 +87,7 @@ return packer.startup(function(use)
 		run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 	})
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+	use("theHamsta/nvim-dap-virtual-text")
 	use("xiyaowong/nvim-transparent")
 	require("transparent").setup({})
 	if packer_bootstrap then
