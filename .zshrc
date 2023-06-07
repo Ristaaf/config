@@ -37,3 +37,8 @@ then
 fi
 
 eval "$(starship init zsh)"
+
+if [ -z "$TMUX" ]
+then
+    tmux attach -t TMUX || tmux new -s TMUX
+fi
