@@ -23,6 +23,7 @@ mason_lspconfig.setup({
 		"tsserver",
 		"html",
 		"cssls",
+		"jsonls",
 	},
 })
 
