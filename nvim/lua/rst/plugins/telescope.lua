@@ -1,33 +1,73 @@
-local telescope_setup, telescope = pcall(require, "telescope")
-if not telescope_setup then
-	return
-end
-
-local actions_setup, actions = pcall(require, "telescope.actions")
-if not actions_setup then
-	return
-end
-
-telescope.setup({
-	defaults = {
-		mappings = {
-			i = {
-				["<C-k>"] = actions.move_selection_previous,
-				["<C-j>"] = actions.move_selection_next,
-				["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-			},
+return {
+	"nvim-telescope/telescope.nvim",
+	tag = "0.1.5",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"debugloop/telescope-undo.nvim",
+		{
+			"nvim-telescope/telescope-fzf-native.nvim",
+			build = "make",
 		},
-		file_ignore_patterns = { "node%_modules/.*" },
-		layout_strategy = "vertical",
-		hidden = true,
+		{
+			"nvim-telescope/telescope-live-grep-args.nvim",
+			version = "^1.0.0",
+		},
 	},
-})
-require("telescope.builtin").lsp_references({
-	layout_strategy = "vertical",
-	layout_config = {
-		width = 0.5,
-		preview_cutoff = 80,
-	},
-})
+	config = function()
+		local telescope = require("telescope")
+		local actions = require("telescope.actions")
+		local builtin = require("telescope.builtin")
 
-telescope.load_extension("fzf")
+		telescope.load_extension("undo")
+		telescope.load_extension("fzf")
+		-- telescope.load_extension("live_grep_args")
+
+		telescope.setup({
+			defaults = {
+				mappings = {
+					i = {
+						["<c-k>"] = actions.move_selection_previous,
+						["<c-j>"] = actions.move_selection_next,
+					},
+				},
+				file_ignore_patterns = { "node%_modules/.*" },
+				layout_strategy = "vertical",
+				hidden = true,
+			},
+			extensions = {
+				undo = {},
+				fzf = {},
+				live_grep_args = {},
+			},
+		})
+
+		builtin.lsp_references({
+			layout_strategy = "vertical",
+			layout_config = {
+				width = 0.5,
+				preview_cutoff = 80,
+			},
+		})
+	end,
+	keys = {
+		{
+			"<leader>ff",
+			":lua require'telescope.builtin'.find_files({ find_command = { 'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
+			"Fuzzy find files by name",
+		},
+		{ "<leader>fs", ":Telescope live_grep<cr>", "Find text in current working directory" },
+		{
+			"<leader>fas",
+			":lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>",
+			"Find text in current working directory with args",
+		},
+		{ "<leader>fc", ":Telescope grep_string<cr>", "Find text under cursor in current working directory" },
+		{ "<leader>fb", ":Telescope buffers<cr>", "List open buffers" },
+		{ "<leader>fh", ":Telescope help_tags<cr>", "List all help tags" },
+		{ "<leader>fr", ":Telescope resume<cr>", "Resume telescope" },
+		{ "<leader>fg", ":Telescope git_status<cr>", "List all files changed in git" },
+		{ "<leader>fd", ":Telescope diagnostics<cr>", "Show diagnostics" },
+		{ "<leader>fu", ":Telescope undo<cr>", "Show undo" },
+	},
+}
+
